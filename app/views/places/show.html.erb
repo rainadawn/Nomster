@@ -45,6 +45,7 @@
 <div class="clear"></div>
 
 
+<br />
 
 
 
@@ -60,7 +61,7 @@
       </div>
       
         <%= simple_form_for @comment, url: place_comments_path(@place) do |f| %>
-          <div class="modal-body">
+        <div class="modal-body">
           <%= f.input :message %>
           <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
         </div>
@@ -79,7 +80,7 @@
 <div class="col-10 offset-1">
 <h1 class="float-left">Comments</h1>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg float-right"  data-toggle="modal" data-target="#myModal">
   Add a Comment
 </button>
 </div>
@@ -97,8 +98,23 @@
       <%= comment.message %>
       <small><%= comment.user.email %></small>
     </blockquote>
+    <% end %>
   </div>
-
-<% end %>
 </div>
+
+
+<h1>Photos</h1>
+
+<div class="clear"></div>
+<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+  <%= f.input :caption %>
+  <%= f.input :picture %>
+  <%= f.submit "Add Photo", class: 'btn btn-primary' %>
+<% end %>
+
+
+
+
+
+
 
