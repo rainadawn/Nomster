@@ -1,4 +1,4 @@
-<div class="booyah-box col-10 offset -1">
+<div class="booyah-box col-10 offset-1">
 	<h1><%= @place.name %></h1>
 	<i><%= @place.address %></i>
 	<br /><br/>
@@ -47,8 +47,6 @@
 
 <br />
 
-
-
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -65,6 +63,7 @@
           <%= f.input :message %>
           <%= f.input :rating, as: :select, collection: Comment::RATINGS %>
         </div>
+        
         <div class="modal-footer">
          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
          <%= f.submit "Add Comment", class: 'btn btn-primary' %>
@@ -73,8 +72,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <div class="col-10 offset-1">
@@ -86,11 +83,13 @@
 </div>
 
 <div class="clear"></div>
+<br />
+
 
 
 <div class="row">
 <% @place.comments.each do |comment| %>
-  <div class="col-12 offset -1 col-sm-6">
+  <div class="col-12 offset-1 col-sm-6">
     <blockquote>
       <% if comment.humanized_rating.present? %>
         <b><%= comment.humanized_rating %></b> -
@@ -98,23 +97,51 @@
       <%= comment.message %>
       <small><%= comment.user.email %></small>
     </blockquote>
-  </div>
+ 
 </div>
 <% end %>
+</div>
 
-<h1>Photos</h1>
 
 <div class="clear"></div>
-<%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
-  <%= f.input :caption %>
-  <%= f.input :picture %>
-  <%= f.submit "Add Photo", class: 'btn btn-primary' %>
-<% end %>
+<!-- Modal -->
+<div class="modal fade" id="myModalPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add a Photo</h4>
+      </div>
+
+        <%= simple_form_for @photo, url: place_photos_path(@place) do |f| %>
+        <div class="modal-body">
+          <%= f.input :caption %>
+          <%= f.input :picture %>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <%= f.submit "Add Photo", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 
 <div class="clear"></div>
+<div class="col-10 offset-1">
+<h1 class="float-left">Photos</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg float-right"  data-toggle="modal" data-target="#myModalPhoto">
+  Add a Photo
+</button>
+</div>
 
-
-<div class="row">
+<div class="clear"></div>
+<br />
 
 <% @place.photos.each do |photo| %>
   <div>
@@ -126,6 +153,7 @@
   </div>
 <% end %>
 </div>
+
 
 
 
