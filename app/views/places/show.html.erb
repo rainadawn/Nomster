@@ -90,7 +90,7 @@
 
 <div class="row">
 <% @place.comments.each do |comment| %>
-  <div class="col-12 col-sm-6">
+  <div class="col-12 offset -1 col-sm-6">
     <blockquote>
       <% if comment.humanized_rating.present? %>
         <b><%= comment.humanized_rating %></b> -
@@ -112,6 +112,10 @@
   <%= f.submit "Add Photo", class: 'btn btn-primary' %>
 <% end %>
 
+<div class="clear"></div>
+
+
+<div class="row">
 
 <% @place.photos.each do |photo| %>
   <div>
@@ -122,7 +126,7 @@
     </blockquote>
   </div>
 <% end %>
-
+</div>
 
 
 
